@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ name }}'s Quick Notes ✅</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="top-bar">
+    <p class="quote">
+        ✨ "{{ quote }}" ✨
+    </p>
+
+    <a href="/" class="btn">Go Back</a>
+
+</div>
+
+<h2>Hello, {{ name }}! 👋</h2>
+
+<!-- ✅ Mood Tracker -->
+<h3>😊 Mood Tracker</h3>
+
+<form method="POST">
+    <button name="mood" value="Happy"
+        class="{% if mood == 'Happy' %}active{% endif %}">
+        😊 Happy
+    </button>
+
+    <button name="mood" value="Okay"
+        class="{% if mood == 'Okay' %}active{% endif %}">
+        😐 Okay
+    </button>
+
+    <button name="mood" value="Sad"
+        class="{% if mood == 'Sad' %}active{% endif %}">
+        😢 Sad
+    </button>
+
+    <button name="mood" value="Tired"
+        class="{% if mood == 'Tired' %}active{% endif %}">
+        😴 Tired
+    </button>
+</form>
+
+{% if mood %}
+<p>You are feeling: <strong>{{ mood }}</strong></p>
+{% endif %}
+
+
+<!-- ✅ To-Do List -->
+<div class="todo-box">
+
+    <h3>📝 To-Do List</h3>
+
+    <form method="POST">
+        <input type="text" name="task" placeholder="Add a task..." required>
+        <button type="submit">Add</button>
+    </form>
+
+    <ul>
+        {% for task in tasks %}
+            <li>
+
+                <!-- checkbox -->
+                <form method="POST" onchange="this.submit()" style="display:inline;">
+                    <input type="hidden" name="index" value="{{ loop.index0 }}">
+                    <input type="checkbox" name="done"
+                           {% if task.done %}checked{% endif %}>
+                </form>
+
+                <span class="task-text">
+                    {{ task.text }}
+                </span>
+
+                <!-- delete -->
+                <form method="POST" style="display:inline;">
+                    <button name="delete" value="{{ loop.index0 }}">❌</button>
+                </form>
+
+            </li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+</body>
+</html>

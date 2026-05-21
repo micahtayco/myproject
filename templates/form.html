@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Quick Notes ✅</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="form-box">
+
+    <h2>✨ My Quick Notes</h2>
+
+    <p class="subtitle">Enter your name to continue</p>
+
+    <form action="/submit" method="post">
+        <input type="text" name="name" placeholder="Enter your name" required>
+        <button type="submit">Enter</button>
+    </form>
+
+</div>
+
+</body>
+</html>
